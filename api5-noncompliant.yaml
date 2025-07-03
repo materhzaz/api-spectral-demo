@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: Product API (Noncompliant)
+  version: 1.0.0
+paths:
+  /v1/products:
+    get:
+      summary: Get all products
+      operationId: get_products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
