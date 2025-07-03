@@ -1,12 +1,15 @@
 openapi: 3.0.3
 info:
-  title: User API (Noncompliant)
+  title: User API
   version: 1.0.0
 paths:
-  /users:
+  /v1/users:  # Versionné
     get:
       summary: Get all users
-      operationId: GetAllUsers
+      description: Retrieves a paginated list of users with authentication.
+      operationId: getAllUsers  # camelCase
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: OK
@@ -15,13 +18,19 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/user'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Server Error
 components:
   schemas:
-    User:
+    user:  # camelCase
       type: object
       properties:
         id:
           type: string
+          example: "123"
         username:
           type: string
+          example: "johndoe"
